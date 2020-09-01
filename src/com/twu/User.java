@@ -1,6 +1,7 @@
 package com.twu;
 
 import java.util.*;
+import java.util.concurrent.atomic.AtomicInteger;
 
 public class User {
     private String userName;
@@ -33,7 +34,7 @@ public class User {
                 '}';
     }
     //Add hot search
-    public void userAddHotSearch(LinkedList<HotSearch> hotSearchList,LinkedHashMap<Integer,HotSearch> hotSearchMap){
+    public void userAddHotSearch(LinkedList<HotSearch> hotSearchList,LinkedList<HotSearch> rankingsList,LinkedHashMap<Integer,HotSearch> hotSearchMap){
         System.out.println("请输入你要添加的热搜时间的名字：");
         Scanner input = new Scanner(System.in);
         String hotSearchName = input.nextLine();
@@ -51,6 +52,7 @@ public class User {
         }
         HotSearch hotSearch = new HotSearch(hotSearchName);
         hotSearchList.add(hotSearch);
+        HotSearchSorting.hotSearchSorting(hotSearchList, rankingsList, hotSearchMap);
         System.out.println("添加热搜成功");
     }
     //Vote for hot search
@@ -183,6 +185,15 @@ public class User {
                 }
             }
         }
+    }
+
+    //View hot search rankings
+    public void userViewHotSearchRankings(LinkedList<HotSearch> rankingsList){
+        AtomicInteger ranking= new AtomicInteger();
+        rankingsList.stream().forEach(hotSearch->{
+            ranking.getAndIncrement();
+            System.out.println(ranking+" "+hotSearch.getHotSearchName()+" "+hotSearch.getSearchHeat());
+        });
     }
 
 }
