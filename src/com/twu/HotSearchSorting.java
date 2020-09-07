@@ -2,8 +2,19 @@ package com.twu;
 
 import java.util.*;
 
+/**
+ * This is a sort of hot search class, defines a static function to sort the hot search.
+ * */
+
 public class HotSearchSorting {
-    public static void hotSearchSorting(LinkedList<HotSearch> hotSearchList, LinkedList<HotSearch> rankingsList, LinkedHashMap<Integer,HotSearch> hotSearchMap){
+    /**
+     * hotSearchSorting:Is a static function to sort hot searches.
+     * The result of sorting is stored in rankingsList.
+     * @param hotSearchList Store added hot searches;
+     * @param rankingsList Hot search ranking after storage sorting;
+     * @param hotSearchMap Store purchased hot search;
+     * */
+    public static void hotSearchSorting(List<HotSearch> hotSearchList, List<HotSearch> rankingsList, LinkedHashMap<Integer,HotSearch> hotSearchMap){
         rankingsList.clear();
         for (HotSearch hotSearch:hotSearchList) {
             rankingsList.add(hotSearch);
@@ -23,7 +34,13 @@ public class HotSearchSorting {
             }
             if (entry.getValue() instanceof HotSearch){
                 HotSearch cur = (HotSearch) entry.getValue();
-                rankingsList.add(index-1,cur);
+                if(index > rankingsList.size()-1){
+                    rankingsList.add(cur);
+                }else {
+                    rankingsList.add(index-1,cur);
+                }
+
+
             }
 
         }

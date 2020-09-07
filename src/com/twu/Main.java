@@ -8,8 +8,8 @@ public class Main {
 
         String control = "启动";
         int homePageOption = 3;
-        LinkedList<HotSearch> hotSearchList = new LinkedList();
-        LinkedList<HotSearch> rankingsList = new LinkedList<>();
+        List<HotSearch> hotSearchList = new LinkedList();
+        List<HotSearch> rankingsList = new LinkedList<>();
         LinkedHashMap<Integer,HotSearch> hotSearchMap = new LinkedHashMap<>();
         while (control != "退出"){
             System.out.println("欢迎来到热搜排行榜，你是？");
@@ -30,16 +30,22 @@ public class Main {
                         userPageOption = input.nextInt();
                         switch (userPageOption){
                             case 1:
-                                user.userViewHotSearchRankings(rankingsList);
+                                user.ViewHotSearchRankings(rankingsList);
                                 break;
                             case 2:
-                                user.voteForHotSearch(hotSearchList, rankingsList, hotSearchMap);
+                                if(user instanceof User){
+                                    User userTemp = (User) user;
+                                    userTemp.voteForHotSearch(hotSearchList, rankingsList, hotSearchMap);
+                                }else {
+                                    throw new RuntimeException("The type does not match and cannot be converted down");
+                                }
+
                                 break;
                             case 3:
                                 user.hotShopping(hotSearchList, rankingsList, hotSearchMap);
                                 break;
                             case 4:
-                                user.userAddHotSearch(hotSearchList,rankingsList, hotSearchMap);
+                                user.AddHotSearch(hotSearchList,rankingsList, hotSearchMap);
                                 break;
                             case 5:
                                 userControl = "退出";
@@ -64,13 +70,19 @@ public class Main {
                             userPageOption = input.nextInt();
                             switch (userPageOption){
                                 case 1:
-                                    admin.adminViewHotSearchRankings(rankingsList);
+                                    admin.ViewHotSearchRankings(rankingsList);
                                     break;
                                 case 2:
-                                    admin.adminAddHotSearch(hotSearchList, rankingsList, hotSearchMap);
+                                    admin.AddHotSearch(hotSearchList, rankingsList, hotSearchMap);
                                     break;
                                 case 3:
-                                    admin.adminAddSuperHotSearch(hotSearchList, rankingsList, hotSearchMap);
+                                    if (admin instanceof Administrator){
+                                        Administrator adminTemp = (Administrator) admin;
+                                        adminTemp.adminAddSuperHotSearch(hotSearchList, rankingsList, hotSearchMap);
+                                    }else {
+                                        throw new RuntimeException("The type does not match and cannot be converted down");
+                                    }
+
                                     break;
                                 case 4:
                                     adminControl = "退出";

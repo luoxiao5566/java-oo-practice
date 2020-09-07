@@ -1,13 +1,20 @@
 package com.twu;
 
-import java.util.Iterator;
-import java.util.LinkedHashMap;
-import java.util.LinkedList;
-import java.util.Map;
+import java.util.*;
 import java.util.jar.JarOutputStream;
-
+/**
+ *This is a class to judge whether a hot search already exists.
+ * It defines a static function to query whether a hot search already exists and returns a Boolean
+ */
 public class VerificationHotSearch {
-    public static boolean Verification(String hotSearchName,LinkedList<HotSearch> hotSearchList, LinkedHashMap<Integer,HotSearch> hotSearchMap){
+    /**
+     * Verification:This is a static function to query whether hot search already exists.
+     * @return Boolean If the hot search already exists, it returns true; if it does not, it returns false.
+     * @param hotSearchName Hot search name added;
+     * @param hotSearchList Store added hot searches;
+     * @param hotSearchMap Store purchased hot search;
+     * */
+    public static boolean Verification(String hotSearchName, List<HotSearch> hotSearchList, LinkedHashMap<Integer,HotSearch> hotSearchMap){
         int listSize = hotSearchList.size();
         int mapSize = hotSearchMap.size();
         if (listSize==0&&mapSize==0){
