@@ -57,6 +57,7 @@ public class Main {
                 case 2:
                     Administrator admin = new Administrator();
                     Scanner adminInput = new Scanner(System.in);
+                    //默认管理员账号：admin；密码：123
                     System.out.println("请输入您的昵称：");
                     String adminName = adminInput.nextLine();
                     System.out.println("请输入您的密码");

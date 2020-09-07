@@ -46,7 +46,7 @@ public class Administrator extends operator implements HotSearchOperation {
     }
     //Add super hot search
     public void adminAddSuperHotSearch(List<HotSearch> hotSearchList, List<HotSearch> rankingsList, LinkedHashMap<Integer,HotSearch> hotSearchMap){
-        System.out.println("请输入你要添加的超级热搜时间的名字：");
+        System.out.println("请输入你要添加的超级热搜事件的名字：");
         Scanner input = new Scanner(System.in);
         String hotSearchName = input.nextLine();
         boolean result = VerificationHotSearch.Verification(hotSearchName, hotSearchList, hotSearchMap);
