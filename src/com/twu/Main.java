@@ -21,7 +21,7 @@ public class Main {
                     System.out.println("请输入你的昵称");
                     Scanner userInput = new Scanner(System.in);
                     String userName = userInput.nextLine();
-                    User user = new User(userName);
+                    HotSearchOperation user = new User(userName);
                     int userPageOption = 5;
                     String userControl = "进入";
                     while (userControl!="退出"){
@@ -55,14 +55,21 @@ public class Main {
 
                     break;
                 case 2:
-                    Administrator admin = new Administrator();
+                    HotSearchOperation admin = new Administrator();
                     Scanner adminInput = new Scanner(System.in);
                     //默认管理员账号：admin；密码：123
                     System.out.println("请输入您的昵称：");
                     String adminName = adminInput.nextLine();
                     System.out.println("请输入您的密码");
                     String  password = adminInput.nextLine();
-                    if (admin.getAdminName().equals(adminName)&&admin.getPassWord().equals(password)){
+                    boolean  VerificationResults = true;
+                    if (admin instanceof Administrator) {
+                        Administrator adminTemp = (Administrator)admin;
+                        VerificationResults = adminTemp.getAdminName().equals(adminName)&&adminTemp.getPassWord().equals(password);
+                    }else {
+                        throw new RuntimeException("The type does not match and cannot be converted down");
+                    }
+                    if (VerificationResults){
                         int adminPageOption = 4;
                         String adminControl = "进入";
                         while (adminControl != "退出"){
@@ -77,13 +84,8 @@ public class Main {
                                     admin.AddHotSearch(hotSearchList, rankingsList, hotSearchMap);
                                     break;
                                 case 3:
-                                    if (admin instanceof Administrator){
-                                        Administrator adminTemp = (Administrator) admin;
-                                        adminTemp.adminAddSuperHotSearch(hotSearchList, rankingsList, hotSearchMap);
-                                    }else {
-                                        throw new RuntimeException("The type does not match and cannot be converted down");
-                                    }
-
+                                    Administrator adminTemp = (Administrator) admin;
+                                    adminTemp.adminAddSuperHotSearch(hotSearchList, rankingsList, hotSearchMap);
                                     break;
                                 case 4:
                                     adminControl = "退出";
